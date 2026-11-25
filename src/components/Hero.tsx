@@ -1,37 +1,35 @@
+import { useTranslation } from 'react-i18next'
+
 export function Hero() {
+  const { t } = useTranslation()
+
   return (
     <section id="hero" className="hero">
       <div className="container hero-grid">
         <div>
-          <span className="hero-badge">A Pathoumvanh Group Business · Est. 09/09/2024</span>
+          <span className="hero-badge">{t('hero.badge')}</span>
           <h1>
-            Warm Hospitality,
+            {t('hero.titleLine1')}
             <br />
-            <span className="accent">Lao Premium</span> Coffee.
+            <span className="accent">{t('hero.titleAccent')}</span>
           </h1>
-          <p className="hero-lead">
-            NANA CAFÉ Coffee &amp; Space brings together 100% Lao Premium Arabica from
-            Paksong, specialty Slow Bar brews, and comforting all-day dining in the
-            heart of Ban Haysoke, Vientiane.
-          </p>
-          <p className="hero-lao">
-            “ເປັນຮ້ານທີ່ໃຫ້ຄວາມຮູ້ສຶກອົບອຸ່ນ, ເປັນກັນເອງ, ມີລົດຊາດກາເຟ ແລະ ອາຫານທີ່ແຊບ, ຄຸ້ມຄ່າ, ຄຸ້ມລາຄາສາມາດຈັບຕ້ອງໄດ້ງ່າຍ”
-          </p>
+          <p className="hero-lead">{t('hero.lead')}</p>
+          <p className="hero-lao">{t('hero.laoQuote')}</p>
           <div className="hero-cta">
-            <a href="#menu" className="btn btn-primary">Explore the Menu</a>
-            <a href="#visit" className="btn btn-ghost">Visit Our Space</a>
+            <a href="#menu" className="btn btn-primary">{t('hero.ctaPrimary')}</a>
+            <a href="#visit" className="btn btn-ghost">{t('hero.ctaSecondary')}</a>
           </div>
           <div className="hero-meta">
             <div>
-              <strong>Open Daily</strong>
-              <span>7:00 – 19:00</span>
+              <strong>{t('hero.hoursLabel')}</strong>
+              <span>{t('hero.hoursVal')}</span>
             </div>
             <div>
-              <strong>Location</strong>
-              <span>Ban Haysoke, Sisattanak, Vientiane</span>
+              <strong>{t('hero.locationLabel')}</strong>
+              <span>{t('hero.locationVal')}</span>
             </div>
             <div>
-              <strong>Hotline</strong>
+              <strong>{t('hero.hotlineLabel')}</strong>
               <span>020 5435 0888</span>
             </div>
           </div>
@@ -45,8 +43,8 @@ export function Hero() {
             />
           </div>
           <div className="hero-floating-card">
-            <strong>Phuluang Village, Paksong</strong>
-            <span>100% Lao Arabica · 1,100–1,200m altitude</span>
+            <strong>{t('hero.floatingTitle')}</strong>
+            <span>{t('hero.floatingSub')}</span>
           </div>
         </div>
       </div>

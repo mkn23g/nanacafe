@@ -1,6 +1,9 @@
 import { useState, useEffect, useCallback } from 'react'
+import { useTranslation } from 'react-i18next'
+import { languages, type SupportedLang } from '../i18n'
 
 export function Header() {
+  const { t, i18n } = useTranslation()
   const [open, setOpen] = useState(false)
   const close = useCallback(() => setOpen(false), [])
 
@@ -15,11 +18,12 @@ export function Header() {
     return () => document.removeEventListener('keydown', onKey)
   }, [open])
 
+  const currentLang = (i18n.language || 'en').slice(0, 2) as SupportedLang
+
   return (
     <header className="header" role="banner">
       <div className="header-inner">
         <a href="#hero" className="brand" onClick={close} aria-label="NANA CAFÉ — Home">
-          {/* Official NANA CAFÉ emblem motif */}
           <svg width="36" height="36" viewBox="0 0 36 36" aria-hidden="true">
             <circle cx="18" cy="18" r="16.5" fill="none" stroke="#d9a74a" strokeWidth="1.6" />
             <circle cx="18" cy="18" r="13.5" fill="none" stroke="#d9a74a" strokeWidth="0.9" />
@@ -33,33 +37,50 @@ export function Header() {
           </span>
         </a>
 
-        <button
-          id="nana-nav-toggle"
-          className="nav-toggle"
-          aria-label={open ? 'Close menu' : 'Open menu'}
-          aria-expanded={open}
-          aria-controls="nana-nav"
-          onClick={() => setOpen(v => !v)}
-        >
-          {open ? (
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round">
-              <line x1="6" y1="6" x2="18" y2="18" /><line x1="6" y1="18" x2="18" y2="6" />
-            </svg>
-          ) : (
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round">
-              <line x1="3" y1="6" x2="21" y2="6" /><line x1="3" y1="12" x2="21" y2="12" /><line x1="3" y1="18" x2="21" y2="18" />
-            </svg>
-          )}
-        </button>
+        <div className="header-actions">
+          <nav>
+            <ul id="nana-nav" className={`nav${open ? ' open' : ''}`} role="list">
+              <li><a href="#story" onClick={close}>{t('nav.story')}</a></li>
+              <li><a href="#menu" onClick={close}>{t('nav.menu')}</a></li>
+              <li><a href="#space" onClick={close}>{t('nav.space')}</a></li>
+              <li><a href="#visit" onClick={close}>{t('nav.visit')}</a></li>
+            </ul>
+          </nav>
 
-        <nav>
-          <ul id="nana-nav" className={`nav${open ? ' open' : ''}`} role="list">
-            <li><a href="#story" onClick={close}>Our Story</a></li>
-            <li><a href="#menu" onClick={close}>Menu</a></li>
-            <li><a href="#space" onClick={close}>Space &amp; Team</a></li>
-            <li><a href="#visit" onClick={close}>Visit Us</a></li>
-          </ul>
-        </nav>
+          <div className="lang-switcher" role="group" aria-label="Language switcher">
+            {languages.map(lang => (
+              <button
+                key={lang.code}
+                type="button"
+                className={`lang-btn${currentLang === lang.code ? ' active' : ''}`}
+                aria-pressed={currentLang === lang.code}
+                title={lang.native}
+                onClick={() => i18n.changeLanguage(lang.code)}
+              >
+                {lang.label}
+              </button>
+            ))}
+          </div>
+
+          <button
+            id="nana-nav-toggle"
+            className="nav-toggle"
+            aria-label={open ? 'Close menu' : 'Open menu'}
+            aria-expanded={open}
+            aria-controls="nana-nav"
+            onClick={() => setOpen(v => !v)}
+          >
+            {open ? (
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round">
+                <line x1="6" y1="6" x2="18" y2="18" /><line x1="6" y1="18" x2="18" y2="6" />
+              </svg>
+            ) : (
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round">
+                <line x1="3" y1="6" x2="21" y2="6" /><line x1="3" y1="12" x2="21" y2="12" /><line x1="3" y1="18" x2="21" y2="18" />
+              </svg>
+            )}
+          </button>
+        </div>
       </div>
     </header>
   )

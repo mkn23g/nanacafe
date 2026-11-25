@@ -1,7 +1,9 @@
 import { useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { menuCategories, menuItems, type MenuCategory } from '../data/cafeData'
 
 export function MenuSection() {
+  const { t } = useTranslation()
   const [activeCategory, setActiveCategory] = useState<'All' | MenuCategory>('All')
   const [search, setSearch] = useState('')
 
@@ -20,12 +22,9 @@ export function MenuSection() {
     <section id="menu" className="section section-cream">
       <div className="container">
         <div className="reveal">
-          <p className="section-label">The Menu</p>
-          <h2 className="section-title">Coffee, Slow Bar &amp; All-Day Kitchen</h2>
-          <p className="section-subtitle">
-            From 35K espresso classics and 59K single-origin Slow Bar brews to fresh
-            sandwiches, pastas, salads, and Lao-Thai favorites. Prices in LAK (K).
-          </p>
+          <p className="section-label">{t('menu.label')}</p>
+          <h2 className="section-title">{t('menu.title')}</h2>
+          <p className="section-subtitle">{t('menu.subtitle')}</p>
         </div>
 
         <div className="menu-controls">
@@ -37,7 +36,7 @@ export function MenuSection() {
               className={`menu-tab${activeCategory === 'All' ? ' active' : ''}`}
               onClick={() => setActiveCategory('All')}
             >
-              All ({menuItems.length})
+              {t('menu.all')} ({menuItems.length})
             </button>
             {menuCategories.map(cat => (
               <button
@@ -48,7 +47,7 @@ export function MenuSection() {
                 className={`menu-tab${activeCategory === cat ? ' active' : ''}`}
                 onClick={() => setActiveCategory(cat)}
               >
-                {cat}
+                {t(`menu.categories.${cat}`)}
               </button>
             ))}
           </div>
@@ -57,7 +56,7 @@ export function MenuSection() {
             type="search"
             className="menu-search"
             aria-label="Search menu items"
-            placeholder="Search coffee, matcha, pasta…"
+            placeholder={t('menu.searchPlaceholder')}
             value={search}
             onChange={e => setSearch(e.target.value)}
           />

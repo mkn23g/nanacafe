@@ -30,8 +30,8 @@
   --border-glass: rgba(255, 255, 255, 0.1);
   --focus: #d9a74a;
 
-  --font-sans: system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans Lao', sans-serif;
-  --font-serif: Georgia, 'Times New Roman', serif;
+  --font-sans: 'Noto Sans Lao', 'Noto Sans Thai', 'Noto Sans SC', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-serif: Georgia, 'Noto Sans Lao', 'Times New Roman', serif;
 
   --header-h: 72px;
   --max-w: 1240px;
@@ -204,6 +204,26 @@ img, svg { max-width: 100%; height: auto; display: block; }
   transition: color 0.2s; white-space: nowrap;
 }
 .nav a:hover { color: var(--gold-light); }
+
+.header-actions {
+  display: flex; align-items: center; gap: 0.75rem;
+}
+.lang-switcher {
+  display: inline-flex; align-items: center;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid var(--border-glass);
+  border-radius: 999px; padding: 0.2rem; gap: 0.15rem;
+}
+.lang-btn {
+  background: transparent; border: none; color: var(--text-muted-light);
+  font-family: inherit; font-size: 0.75rem; font-weight: 700;
+  padding: 0.3rem 0.55rem; border-radius: 999px; cursor: pointer;
+  transition: all 0.2s var(--ease);
+}
+.lang-btn:hover { color: var(--text-light); }
+.lang-btn.active {
+  background: var(--gold); color: var(--espresso);
+}
 
 .nav-toggle {
   display: none; background: none; border: none; color: var(--text-light);

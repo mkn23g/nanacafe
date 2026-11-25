@@ -8,10 +8,13 @@ import { VisitContact } from './components/VisitContact'
 import { Footer } from './components/Footer'
 import { useScrollReveal, useSmoothScroll } from './hooks'
 
+import { useTranslation } from 'react-i18next'
+
 function RootLayout() {
+  const { t } = useTranslation()
   return (
     <>
-      <a href="#main-content" className="skip-link">Skip to main content</a>
+      <a href="#main-content" className="skip-link">{t('skip')}</a>
       <Header />
       <main id="main-content">
         <Outlet />

@@ -1,6 +1,9 @@
 import type { FormEvent } from 'react'
+import { useTranslation } from 'react-i18next'
 
 export function VisitContact() {
+  const { t } = useTranslation()
+
   function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault()
     const form = e.currentTarget
@@ -12,7 +15,7 @@ export function VisitContact() {
     }
     const btn = form.querySelector('button[type="submit"]') as HTMLButtonElement
     const original = btn.textContent
-    btn.textContent = 'Message Noted (Demo)'
+    btn.textContent = t('visit.sentDemo')
     btn.disabled = true
     setTimeout(() => {
       btn.textContent = original
@@ -25,21 +28,18 @@ export function VisitContact() {
     <section id="visit" className="section section-white">
       <div className="container">
         <div className="reveal">
-          <p className="section-label">Visit &amp; Connect</p>
-          <h2 className="section-title">Find NANA CAFÉ in Vientiane</h2>
-          <p className="section-subtitle">
-            Drop by for your morning espresso, a Slow Bar tasting, or a relaxed lunch
-            with colleagues and friends.
-          </p>
+          <p className="section-label">{t('visit.label')}</p>
+          <h2 className="section-title">{t('visit.title')}</h2>
+          <p className="section-subtitle">{t('visit.subtitle')}</p>
         </div>
 
         <div className="contact-grid">
           <div className="contact-card reveal">
-            <h3>Address</h3>
+            <h3>{t('visit.addrHeading')}</h3>
             <p>
-              Ban Haysoke, Sisattanak District, Vientiane Capital, Laos
+              {t('visit.addrEn')}
               <br />
-              ບ້ານ ຫາຍໂສກ, ມ. ສີສັດຕະນາກ, ນະຄອນຫຼວງວຽງຈັນ
+              {t('visit.addrLo')}
             </p>
             <p style={{ marginTop: '0.6rem' }}>
               <a
@@ -48,21 +48,21 @@ export function VisitContact() {
                 rel="noopener noreferrer"
                 style={{ color: 'var(--gold-light)', fontWeight: 700 }}
               >
-                Open in Google Maps →
+                {t('visit.mapsCta')}
               </a>
             </p>
 
-            <h3>Opening Hours</h3>
-            <p>Daily · 7:00 – 19:00</p>
+            <h3>{t('visit.hoursHeading')}</h3>
+            <p>{t('visit.hoursVal')}</p>
 
-            <h3>Phone &amp; Email</h3>
+            <h3>{t('visit.phoneHeading')}</h3>
             <p>
-              Phone: <a href="tel:+8562054350888">020 5435 0888</a>
+              {t('visit.phoneLabel')} <a href="tel:+8562054350888">020 5435 0888</a>
               <br />
-              Email: <a href="mailto:nanacafecoffee88@gmail.com">nanacafecoffee88@gmail.com</a>
+              {t('visit.emailLabel')} <a href="mailto:nanacafecoffee88@gmail.com">nanacafecoffee88@gmail.com</a>
             </p>
 
-            <h3>Social Channels</h3>
+            <h3>{t('visit.socialHeading')}</h3>
             <div className="social-row">
               <span className="social-pill">Facebook: NANA CAFÉ Coffee and space</span>
               <span className="social-pill">IG: @nana_cafe88</span>
@@ -71,40 +71,36 @@ export function VisitContact() {
           </div>
 
           <form className="contact-form reveal" onSubmit={handleSubmit} noValidate aria-label="Cafe inquiry form">
-            <p className="form-note">
-              <strong>Demo Form:</strong> For immediate table bookings or catering, please
-              call <strong>020 5435 0888</strong> or email{' '}
-              <strong>nanacafecoffee88@gmail.com</strong>.
-            </p>
+            <p className="form-note">{t('visit.demoNote')}</p>
 
             <div className="form-group">
-              <label htmlFor="nana-name">Full Name *</label>
-              <input id="nana-name" type="text" required placeholder="Your name" />
+              <label htmlFor="nana-name">{t('visit.nameLabel')}</label>
+              <input id="nana-name" type="text" required placeholder={t('visit.namePlaceholder')} />
             </div>
 
             <div className="form-group">
-              <label htmlFor="nana-contact">Phone or Email *</label>
-              <input id="nana-contact" type="text" required placeholder="020 ... or email@example.com" />
+              <label htmlFor="nana-contact">{t('visit.contactLabel')}</label>
+              <input id="nana-contact" type="text" required placeholder={t('visit.contactPlaceholder')} />
             </div>
 
             <div className="form-group">
-              <label htmlFor="nana-topic">Inquiry Type *</label>
+              <label htmlFor="nana-topic">{t('visit.topicLabel')}</label>
               <select id="nana-topic" required>
-                <option value="">— Select —</option>
-                <option value="table">Table Reservation</option>
-                <option value="catering">Group / Office Catering</option>
-                <option value="space">Event / Space Booking</option>
-                <option value="feedback">General Feedback</option>
+                <option value="">{t('visit.topicDefault')}</option>
+                <option value="table">{t('visit.topicTable')}</option>
+                <option value="catering">{t('visit.topicCatering')}</option>
+                <option value="space">{t('visit.topicSpace')}</option>
+                <option value="feedback">{t('visit.topicFeedback')}</option>
               </select>
             </div>
 
             <div className="form-group">
-              <label htmlFor="nana-msg">Message *</label>
-              <textarea id="nana-msg" required placeholder="Date, party size, or your message…" />
+              <label htmlFor="nana-msg">{t('visit.msgLabel')}</label>
+              <textarea id="nana-msg" required placeholder={t('visit.msgPlaceholder')} />
             </div>
 
             <button type="submit" className="btn btn-primary" style={{ alignSelf: 'flex-start' }}>
-              Send Message
+              {t('visit.submit')}
             </button>
           </form>
         </div>
